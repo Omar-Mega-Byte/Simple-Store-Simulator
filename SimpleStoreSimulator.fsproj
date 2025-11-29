@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>SimpleStoreSimulator</RootNamespace>
+    <AssemblyName>SimpleStoreSimulator</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Search Module Types must come first -->
+    <Compile Include="src\Search\SearchTypes.fs" />
+    
+    <!-- Product Module -->
+    <Compile Include="src\Product\Product.fs" />
+    
+    <!-- Search Module Operations (depends on Product) -->
+    <Compile Include="src\Search\SearchOperations.fs" />
+    
+    <!-- Main Program Entry Point (must be last) -->
+    <Compile Include="src\Program.fs" />
+  </ItemGroup>
+
+</Project>
