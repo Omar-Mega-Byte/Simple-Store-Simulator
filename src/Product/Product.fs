@@ -1,3 +1,5 @@
+module Product
+
 // Product Type Definition
 type Product = { 
     Id: int
