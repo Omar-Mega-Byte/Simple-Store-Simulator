@@ -1,3 +1,7 @@
+module Product
+
+// Product Module - عمر أحمد محمود عواد (Catalog Developer)
+
 // Product Type Definition
 type Product = { 
     Id: int
@@ -88,31 +92,3 @@ let displayByCategory (catalog: ProductCatalog) (category: string) =
         printfn "No products in this category."
     else
         products |> List.iter displayProduct
-
-// Example Usage
-let ProductCatalog = initializeCatalog()
-
-displayCatalog "Store Inventory" ProductCatalog
-
-// Display by categories
-displayByCategory ProductCatalog "Sweets"
-displayByCategory ProductCatalog "Snacks"
-
-// Test individual operations
-printfn "--- Testing Catalog Operations ---\n"
-
-match getProduct ProductCatalog 1 with
-| Some p -> printfn "Found product: %s at %s" p.Name (formatPrice p.Price)
-| None -> printfn "Product not found"
-
-printfn "\nChecking stock for Chocolate (need 5): %b" (
-    match getProduct ProductCatalog 1 with
-    | Some p -> isInStock p 5
-    | None -> false
-)
-
-let updatedCatalog = updateStock ProductCatalog 1 25
-printfn "\nUpdated Chocolate stock to 25:"
-match getProduct updatedCatalog 1 with
-| Some p -> printfn "New stock level: %d units" p.Stock
-| None -> printfn "Product not found"
