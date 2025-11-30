@@ -26,11 +26,20 @@ type ProductViewModel(product: Product) =
 type CartItemViewModel(product: Product, quantity: int) =
     inherit ViewModelBase()
     
-    member val Quantity = quantity with get, set
+    let mutable qty = quantity
+    
+    member this.Quantity 
+        with get() = qty
+        and set(value) = 
+            qty <- value
+            this.OnPropertyChanged("Quantity")
+            this.OnPropertyChanged("Subtotal")
+            this.OnPropertyChanged("SubtotalDisplay")
+    
     member this.Product = product
     member this.Name = product.Name
     member this.Price = product.Price
-    member this.Subtotal = product.Price * decimal quantity
+    member this.Subtotal = product.Price * decimal qty
     member this.SubtotalDisplay = sprintf "EGP %.2f" this.Subtotal
 
 // Main Window ViewModel
@@ -155,8 +164,12 @@ type MainWindowViewModel() as this =
             let existing = cartItems |> Seq.tryFind (fun item -> item.Product.Id = productVM.Id)
             match existing with
             | Some item ->
-                item.Quantity <- item.Quantity + 1
-                this.OnPropertyChanged("CartItems")
+                // Check if we can add more (stock limit)
+                if item.Quantity < productVM.Stock then
+                    item.Quantity <- item.Quantity + 1
+                    this.OnPropertyChanged("CartItems")
+                else
+                    printfn "⚠️ Cannot add more - only %d units in stock" productVM.Stock
             | None ->
                 cartItems.Add(CartItemViewModel(productVM.Product, 1))
             
