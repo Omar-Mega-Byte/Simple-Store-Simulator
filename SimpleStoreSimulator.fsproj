@@ -3,6 +3,7 @@
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>SimpleStoreSimulator</RootNamespace>
     <AssemblyName>SimpleStoreSimulator</AssemblyName>
   </PropertyGroup>
@@ -16,6 +17,8 @@
     
     <!-- Search Module Operations (depends on Product) -->
     <Compile Include="src\Search\SearchOperations.fs" />
+    <Compile Include="src/Cart/CartTypes.fs" />
+    <Compile Include="src/Cart/CartOperations.fs" />
   </ItemGroup>
 
 </Project>

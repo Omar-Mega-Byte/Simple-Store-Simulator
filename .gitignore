@@ -487,3 +487,6 @@ temp/
 # OS-specific
 .DS_Store
 Thumbs.db
+
+# iodine config
+/.config
