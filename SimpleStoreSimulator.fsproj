@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>SimpleStoreSimulator</RootNamespace>
     <AssemblyName>SimpleStoreSimulator</AssemblyName>
@@ -16,18 +16,6 @@
     
     <!-- Search Module Operations (depends on Product) -->
     <Compile Include="src\Search\SearchOperations.fs" />
-    
-    <!-- UI Module - Display Helpers -->
-    <Compile Include="src\UI\DisplayHelpers.fs" />
-    
-    <!-- UI Module - Menu System -->
-    <Compile Include="src\UI\Menu.fs" />
-    
-    <!-- UI Module - Main Console UI (depends on all above modules) -->
-    <Compile Include="src\UI\ConsoleUI.fs" />
-    
-    <!-- Main Program Entry Point (must be last) -->
-    <Compile Include="src\Program.fs" />
   </ItemGroup>
 
 </Project>
