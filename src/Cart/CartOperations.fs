@@ -88,7 +88,7 @@ let isEmpty (cart: Cart) : bool = Map.isEmpty cart.Items
 let clear (cart: Cart) : Cart = empty
 
 //! this is with assuming no concurrency. will not double check stocks again.
-let checkout (config: {|taxRate: decimal; shippingRates: decimal * decimal * decimal|}) (catalog: ProductCatalog) (cart: Cart) 
+let checkout (config: CheckoutConfig) (catalog: ProductCatalog) (cart: Cart) 
     : Result<Order * ProductCatalog, string> =
     if isEmpty cart then
         Error "Cannot checkout an empty cart"
@@ -103,9 +103,9 @@ let checkout (config: {|taxRate: decimal; shippingRates: decimal * decimal * dec
                 updateStock catalog productId newStock
             ) catalog
 
-        let (tier1, tier2, tier3) = config.shippingRates
+        let (tier1, tier2, tier3) = config.ShippingRates
         let subtotal = getSubtotal cart
-        let tax = getTax cart config.taxRate 
+        let tax = getTax cart config.TaxRate 
         let shipping = getShippingFee cart tier1 tier2 tier3
         let total = subtotal + tax + shipping
     
