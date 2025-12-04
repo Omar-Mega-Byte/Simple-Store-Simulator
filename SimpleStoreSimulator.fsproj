@@ -17,9 +17,15 @@
     <!-- Search Module Operations (depends on Product) -->
     <Compile Include="src\Search\SearchOperations.fs" />
     
-    <!-- Cart Module -->
+    <!-- Cart Module Types -->
     <Compile Include="src\Cart\CartTypes.fs" />
     <Compile Include="src\Cart\CartConfig.fs" />
+    
+    <!-- Calculator Module (depends on CartTypes) -->
+    <Compile Include="src\Calculator\PriceCalculator.fs" />
+    <Compile Include="src\Calculator\DiscountEngine.fs" />
+    
+    <!-- Cart Operations (depends on Calculator) -->
     <Compile Include="src\Cart\CartOperations.fs" />
   </ItemGroup>
 
