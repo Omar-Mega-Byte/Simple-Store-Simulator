@@ -2,6 +2,7 @@ module CartOperations
 
 open CartTypes
 open Product
+open PriceCalculator
 
 let empty: Cart = { Items = Map.empty }
 
@@ -57,32 +58,6 @@ let removeItemCompletely (productId: int) (cart: Cart) : Cart =
 let getItems (cart: Cart) : CartEntry list =
     cart.Items |> Map.toList |> List.map snd
 
-let getItemCount (cart: Cart) : int =
-    cart.Items |> Map.values |> Seq.sumBy (fun entry -> entry.Quantity)
-
-let getSubtotal (cart: Cart) : decimal =
-    cart.Items
-    |> Map.values
-    |> Seq.sumBy (fun entry -> entry.Product.Price * decimal entry.Quantity)
-
-let getTax (cart: Cart) (taxRate: decimal) : decimal = getSubtotal cart * taxRate
-
-let getShippingFee (cart: Cart) (tierOne: decimal) (tierTwo: decimal) (tierThree: decimal) : decimal =
-    let count = getItemCount cart
-
-    match count with
-    | 0 -> 0m
-    | n when n <= 5 -> tierOne
-    | n when n <= 10 -> tierTwo
-    | _ -> tierThree
-
-let getTotal (cart: Cart) (taxRate: decimal) (shippingFees: decimal * decimal * decimal) : decimal =
-    let (s1, s2, s3) = shippingFees
-    let subtotal = getSubtotal cart
-    let tax = getTax cart taxRate
-    let shipping = getShippingFee cart s1 s2 s3
-    subtotal + tax + shipping
-
 let isEmpty (cart: Cart) : bool = Map.isEmpty cart.Items
 
 let clear (cart: Cart) : Cart = empty
@@ -103,20 +78,6 @@ let checkout (config: CheckoutConfig) (catalog: ProductCatalog) (cart: Cart)
                 updateStock catalog productId newStock
             ) catalog
 
-        let (tier1, tier2, tier3) = config.ShippingRates
-        let subtotal = getSubtotal cart
-        let tax = getTax cart config.TaxRate 
-        let shipping = getShippingFee cart tier1 tier2 tier3
-        let total = subtotal + tax + shipping
-    
-        //TODO do something with this
-        let order = {
-            OrderId = System.Guid.NewGuid().ToString()
-            Items = getItems cart
-            Subtotal = subtotal
-            Tax = tax
-            Shipping = shipping
-            Total = total
-            Timestamp = System.DateTime.UtcNow
-        }
+        // Use PriceCalculator module for order creation
+        let order = createOrderSummary cart config
         Ok (order, updatedCatalog)
