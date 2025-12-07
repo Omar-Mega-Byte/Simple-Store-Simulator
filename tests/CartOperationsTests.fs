@@ -2,6 +2,7 @@ module CartOperationsTests
 
 open Expecto
 open Product
+open ProductOperations
 open CartTypes
 open CartOperations
 
@@ -188,7 +189,7 @@ let cartOperationsTests =
         
         testCase "Checkout empty cart fails" <| fun _ ->
             let config = createTestConfig()
-            let result = checkout config sampleCatalog empty
+            let result = checkout config sampleCatalog empty 0m
             match result with
             | Ok _ ->
                 failtest "Checkout empty cart should fail"
@@ -205,7 +206,7 @@ let cartOperationsTests =
                     | Some p -> p.Stock
                     | None -> 0
                 
-                let checkoutResult = checkout config sampleCatalog cart1
+                let checkoutResult = checkout config sampleCatalog cart1 0m
                 match checkoutResult with
                 | Ok (order, updatedCatalog) ->
                     let newStock = 
@@ -223,7 +224,7 @@ let cartOperationsTests =
             let cart1Result = addItem sampleCatalog 1 2 empty
             match cart1Result with
             | Ok cart1 ->
-                let checkoutResult = checkout config sampleCatalog cart1
+                let checkoutResult = checkout config sampleCatalog cart1 0m
                 match checkoutResult with
                 | Ok (order, _) ->
                     Expect.isNotNull order.OrderId "Order should have an ID"
