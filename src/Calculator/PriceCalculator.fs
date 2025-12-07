@@ -104,18 +104,20 @@ let calculateCartTotalWithBreakdown (cart: Cart) (taxRate: decimal) (shippingRat
 // ORDER SUMMARY CREATION
 // ============================================
 
-/// Create an order summary from a cart
-let createOrderSummary (cart: Cart) (config: CheckoutConfig) : Order =
+/// Create an order summary from a cart with discount applied
+let createOrderSummary (cart: Cart) (config: CheckoutConfig) (discount: decimal) : Order =
     let (tier1, tier2, tier3) = config.ShippingRates
     let subtotal = calculateCartSubtotal cart
-    let tax = calculateTax subtotal config.TaxRate
+    let discountedSubtotal = subtotal - discount
+    let tax = calculateTax discountedSubtotal config.TaxRate
     let shipping = calculateCartShipping cart config.ShippingRates
-    let total = calculateTotal subtotal tax shipping
+    let total = calculateTotal discountedSubtotal tax shipping
     
     {
         OrderId = System.Guid.NewGuid().ToString()
         Items = cart.Items |> Map.toList |> List.map snd
         Subtotal = subtotal
+        Discount = discount
         Tax = tax
         Shipping = shipping
         Total = total
@@ -123,8 +125,8 @@ let createOrderSummary (cart: Cart) (config: CheckoutConfig) : Order =
     }
 
 /// Create order summary with custom order ID
-let createOrderSummaryWithId (orderId: string) (cart: Cart) (config: CheckoutConfig) : Order =
-    let order = createOrderSummary cart config
+let createOrderSummaryWithId (orderId: string) (cart: Cart) (config: CheckoutConfig) (discount: decimal) : Order =
+    let order = createOrderSummary cart config discount
     { order with OrderId = orderId }
 
 // ============================================

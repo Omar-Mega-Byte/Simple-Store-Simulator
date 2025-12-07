@@ -2,10 +2,9 @@ module JsonAndDatabaseTests
 
 open Expecto
 open Product
-open ProductOperations
 open ProductDatabase
 open JsonSerializer
-open FileOperations
+open FileIO.FileOperations
 open CartTypes
 open System
 open System.IO
@@ -23,7 +22,7 @@ let databaseTests =
             initializeDatabase()
             
             // Verify database file was created
-            Expect.isTrue (File.Exists("products.db")) "Database file should be created"
+            Expect.isTrue (File.Exists(Path.Combine("data", "products.db"))) "Database file should be created"
         
         testCase "Database loads correct number of products" <| fun _ ->
             // Initialize database (will load existing products)

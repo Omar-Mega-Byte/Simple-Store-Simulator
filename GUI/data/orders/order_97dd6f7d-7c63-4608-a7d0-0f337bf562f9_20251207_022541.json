@@ -1,11 +1,11 @@
 {
-  "OrderId": "40f7bc04-3b5d-4b48-af8f-66aa9ddf0d4f",
+  "OrderId": "97dd6f7d-7c63-4608-a7d0-0f337bf562f9",
   "Items": [
     {
       "Product": {
         "Id": 21,
         "Name": "Beef",
-        "Price": 95,
+        "Price": 95.00,
         "Description": "Lean ground beef",
         "Category": "Frozen",
         "Stock": 6
@@ -13,10 +13,10 @@
       "Quantity": 6
     }
   ],
-  "Subtotal": 570,
-  "Discount": 114.00,
-  "Tax": 63.8400,
+  "Subtotal": 570.00,
+  "Discount": 114.0000,
+  "Tax": 63.840000,
   "Shipping": 20,
-  "Total": 539.8400,
-  "Timestamp": "2025-12-07T00:03:11.7064938Z"
+  "Total": 539.840000,
+  "Timestamp": "2025-12-07T00:25:41.7396651Z"
 }

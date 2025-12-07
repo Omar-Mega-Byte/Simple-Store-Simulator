@@ -4,6 +4,7 @@ open System
 open System.Collections.ObjectModel
 open CommunityToolkit.Mvvm.Input
 open Product
+open ProductDatabase
 open SearchOperations
 open SearchTypes
 open CartTypes
@@ -48,7 +49,7 @@ type MainWindowViewModel() as this =
     // Get configuration from Cart module (no business rules in GUI)
     let config = CartConfig.getConfig()
     
-    let mutable catalog = initializeCatalog()
+    let mutable catalog = initializeCatalogWithDatabase()
     let mutable cart = CartOperations.empty
     let mutable products = ObservableCollection<ProductViewModel>()
     let mutable cartItems = ObservableCollection<CartItemViewModel>()
@@ -425,15 +426,22 @@ type MainWindowViewModel() as this =
     
     member private this.Checkout() =
         if not (CartOperations.isEmpty cart) then
-            match CartOperations.checkout config catalog cart with
+            match CartOperations.checkout config catalog cart this.CartDiscount with
             | Ok (order, updatedCatalog) ->
                 catalog <- updatedCatalog
                 
                 // Use PriceCalculator's formatPrice for consistent formatting
-                let message = sprintf "✅ Order %s completed!\n\n📦 Items: %d\n💰 Subtotal: %s\n📊 Tax: %s\n🚚 Shipping: %s\n💳 Total: %s\n\n🕒 %s" 
+                let discountMsg = 
+                    if order.Discount > 0m then
+                        sprintf "\n💸 Discount: -%s" (formatPrice order.Discount)
+                    else
+                        ""
+                
+                let message = sprintf "✅ Order %s completed!\n\n📦 Items: %d\n💰 Subtotal: %s%s\n📊 Tax: %s\n🚚 Shipping: %s\n💳 Total: %s\n\n🕒 %s" 
                                       (order.OrderId.Substring(0, 8))
                                       (order.Items |> List.sumBy (fun e -> e.Quantity))
                                       (formatPrice order.Subtotal)
+                                      discountMsg
                                       (formatPrice order.Tax)
                                       (formatPrice order.Shipping)
                                       (formatPrice order.Total)

@@ -18,6 +18,7 @@ type Order = {
     OrderId: string
     Items: CartEntry list
     Subtotal: decimal
+    Discount: decimal
     Tax: decimal
     Shipping: decimal
     Total: decimal

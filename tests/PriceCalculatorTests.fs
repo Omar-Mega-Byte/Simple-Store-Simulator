@@ -2,7 +2,6 @@ module PriceCalculatorTests
 
 open Expecto
 open Product
-open ProductOperations
 open CartTypes
 open CartOperations
 open PriceCalculator

@@ -2,7 +2,6 @@ module ProductTests
 
 open Expecto
 open Product
-open ProductOperations
 open PriceCalculator
 
 // ============================================

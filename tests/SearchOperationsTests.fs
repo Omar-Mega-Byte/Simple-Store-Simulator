@@ -2,7 +2,6 @@ module SearchOperationsTests
 
 open Expecto
 open Product
-open ProductOperations
 open SearchOperations
 open SearchTypes
 

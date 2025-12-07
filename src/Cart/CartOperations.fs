@@ -3,6 +3,8 @@ module CartOperations
 open CartTypes
 open Product
 open PriceCalculator
+open FileIO.FileOperations
+open ProductDatabase
 
 let empty: Cart = { Items = Map.empty }
 
@@ -63,7 +65,7 @@ let isEmpty (cart: Cart) : bool = Map.isEmpty cart.Items
 let clear (cart: Cart) : Cart = empty
 
 //! this is with assuming no concurrency. will not double check stocks again.
-let checkout (config: CheckoutConfig) (catalog: ProductCatalog) (cart: Cart) 
+let checkout (config: CheckoutConfig) (catalog: ProductCatalog) (cart: Cart) (discount: decimal)
     : Result<Order * ProductCatalog, string> =
     if isEmpty cart then
         Error "Cannot checkout an empty cart"
@@ -75,9 +77,28 @@ let checkout (config: CheckoutConfig) (catalog: ProductCatalog) (cart: Cart)
                     match getProduct catalog productId with
                     | Some product -> product.Stock - entry.Quantity
                     | None -> 0 //! again this is never happening on a single user system
+                
+                // Update database with new stock
+                updateProductStock productId newStock
+                
+                // Update in-memory catalog
                 updateStock catalog productId newStock
             ) catalog
 
-        // Use PriceCalculator module for order creation
-        let order = createOrderSummary cart config
+        // Use PriceCalculator module for order creation with discount
+        let order = createOrderSummary cart config discount
+        
+        // Save order to JSON and TXT files
+        match saveOrder order with
+        | Ok jsonPath -> 
+            printfn "✅ Order saved to: %s" jsonPath
+        | Error msg -> 
+            printfn "⚠️ Failed to save order JSON: %s" msg
+        
+        match saveOrderSummary order with
+        | Ok txtPath -> 
+            printfn "✅ Order summary saved to: %s" txtPath
+        | Error msg -> 
+            printfn "⚠️ Failed to save order summary: %s" msg
+        
         Ok (order, updatedCatalog)
