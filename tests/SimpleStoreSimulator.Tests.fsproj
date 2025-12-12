@@ -12,6 +12,8 @@
     <Compile Include="PriceCalculatorTests.fs" />
     <Compile Include="SearchOperationsTests.fs" />
     <Compile Include="JsonAndDatabaseTests.fs" />
+    <Compile Include="FileOperationsAutomationTests.fs" />
+    <Compile Include="DiscountEngineAutomationTests.fs" />
     <Compile Include="Main.fs" />
   </ItemGroup>
 
