@@ -20,7 +20,7 @@ let searchByName (products: Product list) (searchTerm: string) : Product list =
         |> List.filter (fun p -> 
             p.Name.ToLower().Contains(term))
 
-/// Search products by description (case-insensitive)
+/// Search products by description (case-insensitive) TEMPORARY
 let searchByDescription (products: Product list) (searchTerm: string) : Product list =
     if String.IsNullOrWhiteSpace(searchTerm) then
         products
@@ -90,7 +90,7 @@ let filterInStockOnly (products: Product list) : Product list =
     products
     |> List.filter (fun p -> p.Stock > 0)
 
-/// Filter products that are out of stock (stock = 0)
+/// Filter products that are out of stock (stock = 0) I DONT USE THIS ONE
 let filterOutOfStock (products: Product list) : Product list =
     products
     |> List.filter (fun p -> p.Stock = 0)
@@ -363,89 +363,3 @@ let displaySearchResults (result: SearchResult<Product>) =
     
     printfn "=========================================="
 
-// ============================================
-// EXAMPLES AND TESTING
-// ============================================
-
-/// Example: Create sample products for testing
-let createSampleProducts () : Product list = [
-    { Id = 1; Name = "Chocolate"; Price = 15.00m; Description = "Delicious milk chocolate bar"; Category = "Sweets"; Stock = 10 }
-    { Id = 2; Name = "Biscuits"; Price = 10.00m; Description = "Crunchy butter biscuits"; Category = "Snacks"; Stock = 20 }
-    { Id = 3; Name = "Ice Cream"; Price = 12.50m; Description = "Vanilla ice cream tub"; Category = "Frozen"; Stock = 5 }
-    { Id = 4; Name = "Cookies"; Price = 8.00m; Description = "Chocolate chip cookies"; Category = "Snacks"; Stock = 15 }
-    { Id = 5; Name = "Candy"; Price = 5.00m; Description = "Assorted fruit candies"; Category = "Sweets"; Stock = 30 }
-    { Id = 6; Name = "Chips"; Price = 7.50m; Description = "Crispy potato chips"; Category = "Snacks"; Stock = 0 }
-    { Id = 7; Name = "Juice"; Price = 18.00m; Description = "Fresh orange juice"; Category = "Beverages"; Stock = 12 }
-    { Id = 8; Name = "Cake"; Price = 25.00m; Description = "Chocolate cake"; Category = "Sweets"; Stock = 3 }
-]
-
-/// Run example searches
-let runExamples () =
-    printfn "=========================================="
-    printfn "SEARCH & FILTER MODULE EXAMPLES"
-    printfn "by عمر أحمد الرفاعي طليس"
-    printfn "=========================================="
-    printfn ""
-    
-    let products = createSampleProducts()
-    
-    // Example 1: Search by name
-    printfn "Example 1: Search for 'chocolate'"
-    let result1 = searchByName products "chocolate"
-    printfn "Found %d product(s)" (List.length result1)
-    result1 |> List.iter (fun p -> printfn "  - %s" p.Name)
-    printfn ""
-    
-    // Example 2: Filter by category
-    printfn "Example 2: Filter by 'Snacks' category"
-    let result2 = filterByCategory products "Snacks"
-    printfn "Found %d product(s)" (List.length result2)
-    result2 |> List.iter (fun p -> printfn "  - %s (EGP %.2f)" p.Name p.Price)
-    printfn ""
-    
-    // Example 3: Filter by price range
-    printfn "Example 3: Products between EGP 5 and EGP 15"
-    let result3 = filterByPriceRange products 5.00m 15.00m
-    printfn "Found %d product(s)" (List.length result3)
-    result3 |> List.iter (fun p -> printfn "  - %s at EGP %.2f" p.Name p.Price)
-    printfn ""
-    
-    // Example 4: Sort by price
-    printfn "Example 4: All products sorted by price (ascending)"
-    let result4 = sortByPrice products true
-    result4 |> List.iter (fun p -> printfn "  - %s: EGP %.2f" p.Name p.Price)
-    printfn ""
-    
-    // Example 5: Advanced search with criteria
-    printfn "Example 5: Advanced search - In stock Sweets under EGP 20"
-    let criteria = {
-        SearchTerm = None
-        Category = Some "Sweets"
-        PriceRange = Some { MinPrice = 0m; MaxPrice = 20m }
-        StockRange = None
-        InStockOnly = true
-    }
-    let sortConfig = Some { SortBy = ByPrice; Order = Ascending }
-    let result5 = searchWithMetadata products criteria sortConfig
-    displaySearchResults result5
-    
-    // Example 6: Get categories
-    printfn "Example 6: All available categories"
-    let categories = getCategories products
-    categories |> List.iter (fun c -> printfn "  - %s" c)
-    printfn ""
-    
-    // Example 7: Find best deals
-    printfn "Example 7: Top 3 cheapest products in stock"
-    let result7 = findBestDeals products 3
-    result7 |> List.iter (fun p -> printfn "  - %s: EGP %.2f (Stock: %d)" p.Name p.Price p.Stock)
-    printfn ""
-    
-    // Example 8: Products needing restock
-    printfn "Example 8: Products with low stock (≤ 5 units)"
-    let result8 = findRestockNeeded products 5
-    result8 |> List.iter (fun p -> printfn "  - %s: %d units remaining" p.Name p.Stock)
-    printfn ""
-
-// Uncomment to run examples
-// runExamples()
