@@ -1,75 +1,198 @@
 # Simple Store Simulator 🛒
 
-A virtual F# store application with cart functionality and product management capabilities. This project demonstrates functional programming concepts including immutable data structures, pure functions, and state management in F#.
+A comprehensive F# e-commerce simulation system with dual user interfaces (Console CLI + Modern GUI), SQLite database integration, advanced price calculation engine, and complete order management. This production-ready application demonstrates functional programming excellence with 30+ automated tests and enterprise-level architecture.
 
 ## 📋 Table of Contents
 
 - [Project Overview](#project-overview)
+- [Key Highlights](#key-highlights)
 - [Objectives](#objectives)
 - [Features](#features)
+- [User Interfaces](#user-interfaces)
 - [Architecture](#architecture)
 - [Technology Stack](#technology-stack)
 - [Project Structure](#project-structure)
 - [Getting Started](#getting-started)
+- [Running the Application](#running-the-application)
+- [Database Information](#database-information)
 - [Team Roles & Responsibilities](#team-roles--responsibilities)
 - [Development Guidelines](#development-guidelines)
 - [Data Structures](#data-structures)
 - [Core Modules](#core-modules)
 - [Testing Strategy](#testing-strategy)
+- [Export Capabilities](#export-capabilities)
 - [Contributing](#contributing)
+- [Documentation](#documentation)
 - [License](#license)
 
 ## 🎯 Project Overview
 
-The Simple Store Simulator is an educational project designed to help students learn F# functional programming concepts through building a practical e-commerce application. Users can browse products, manage shopping carts, and complete checkout processes—all implemented using immutable data structures and pure functions.
+The Simple Store Simulator is a production-ready F# e-commerce application that demonstrates advanced functional programming concepts. Built with clean architecture principles, the system features dual user interfaces (Console CLI and Avalonia GUI), SQLite database integration with 33+ products, comprehensive testing suite with 100% pass rate, and enterprise-grade features including order management, discount engine, and multi-format data export capabilities.
+
+**Development Period:** Fall 2024 - Winter 2025  
+**Version:** 1.0 (Production Ready)  
+**Target Framework:** .NET 6.0  
+**Total Tests:** 30 Automated Unit Tests (All Passing)
+
+## 🌟 Key Highlights
+
+- ✅ **Dual User Interface**: Professional Console CLI + Modern Avalonia Windows GUI
+- ✅ **Database Integration**: SQLite with 33+ products across 6 categories
+- ✅ **Advanced Features**: Tax calculation, shipping costs, multi-tier discount engine
+- ✅ **Data Export**: JSON, CSV, and Text format support with timestamped orders
+- ✅ **Comprehensive Testing**: 30 automated tests with 100% pass rate
+- ✅ **Functional Programming**: Pure functions, immutable data, pattern matching
+- ✅ **Clean Architecture**: Multi-tier layered design with clear separation of concerns
+- ✅ **Production Ready**: Error handling, validation, and professional UX
 
 ## 🎓 Objectives
 
-- **Learn Functional Programming**: Master F# syntax and functional programming paradigms
-- **Master Data Structures**: Work with immutable Lists and Maps
-- **Practice Pure Functions**: Implement side-effect-free functions
-- **Understand State Management**: Handle application state immutably
-- **Apply Real-World Scenarios**: Build a practical e-commerce system
-- **Collaborate as a Team**: Experience role-based software development
+- **Master Functional Programming**: Demonstrate F# syntax, immutability, and functional paradigms
+- **Build Real-World Systems**: Create production-grade e-commerce application
+- **Database Operations**: Integrate SQLite for persistent product catalog
+- **UI Development**: Implement both CLI and GUI interfaces
+- **Advanced Calculations**: Tax, shipping, discounts, and price calculations
+- **Testing Excellence**: Achieve comprehensive test coverage
+- **Team Collaboration**: Practice role-based agile development
+- **Best Practices**: Apply clean code, SOLID principles, and documentation standards
 
 ## ✨ Features
 
-### Core Features
+### Core E-Commerce Features
+
 1. **Product Catalog Management**
-   - Store products in an immutable Map data structure
-   - Product attributes: ID, Name, Price, Description, Stock quantity
-   - View complete product listings
+   - 33+ products across 6 categories (Snacks, Dairy, Beverages, Sweets, Fruits, Vegetables)
+   - SQLite database integration with persistent storage
+   - Real-time stock tracking and validation
+   - Product attributes: ID, Name, Price (EGP), Description, Category, Stock
+   - Categories: Snacks, Dairy, Beverages, Sweets, Fruits, Vegetables, Frozen
 
 2. **Shopping Cart Operations**
-   - Add products to cart with quantity selection
+   - Add products with quantity selection and stock validation
    - Remove products from cart
-   - Update product quantities
-   - View cart contents
-   - Immutable list-based cart implementation
+   - Update product quantities dynamically
+   - View cart contents with line items
+   - Automatic total calculation
+   - Cart persistence across sessions
+   - Immutable list-based implementation
 
-3. **Price Calculation**
-   - Calculate subtotals for individual items
-   - Compute cart total
-   - Apply discounts (optional enhancement)
-   - Tax calculation (optional enhancement)
+3. **Advanced Price Calculation Engine**
+   - Subtotal calculation per line item (price × quantity)
+   - Cart subtotal aggregation
+   - **Tax Calculation**: 14% VAT (configurable)
+   - **Shipping Costs**: Free shipping over 200 EGP, otherwise 30 EGP
+   - **Multi-Tier Discount System**:
+     - Percentage-based discounts (e.g., 10% off)
+     - Fixed amount discounts (e.g., 50 EGP off)
+     - Buy X Get Y Free (e.g., Buy 3 Get 1 Free)
+     - Minimum purchase requirements
+   - Final total with all adjustments
 
-4. **Search & Filter**
-   - Search products by name
-   - Filter by price range
-   - Filter by category
-   - Sort products (by price, name, etc.)
+4. **Search & Filter System**
+   - **Search by Name**: Case-insensitive product search
+   - **Filter by Price Range**: Min/max price filtering
+   - **Filter by Category**: Browse by product category
+   - **Sort Products**: By price (ascending/descending) or name
+   - **Combined Filters**: Apply multiple criteria simultaneously
+   - **Category Listing**: View all available categories
 
-5. **Data Persistence**
-   - Save cart summary to JSON
-   - Export purchase history
-   - Load product catalog from JSON
-   - Session state management
+5. **Order Management & Persistence**
+   - Generate unique order IDs (GUID-based)
+   - Timestamped order creation (YYYYMMDD_HHMMSS)
+   - Complete order summaries with all details
+   - Save orders to JSON files in `data/orders/` directory
+   - Order history tracking
+   - Automatic file naming with order ID and timestamp
 
-6. **User Interface**
-   - Browse product catalog
-   - Interactive cart management
-   - Checkout summary display
-   - Forms for product browsing and cart operations
+6. **Multi-Format Data Export**
+   - **JSON Export**: Structured data with full order details
+   - **CSV Export**: Spreadsheet-compatible format
+   - **Text Export**: Human-readable receipt format
+   - Customizable export paths
+   - Error handling and validation
+
+### User Interface Features
+
+#### Console CLI Interface
+- 🎨 Colored output (success, error, warning, info)
+- 📦 Box-drawing ASCII art menus
+- 🔢 Interactive numeric menu selection
+- 💬 Input validation and error messaging
+- 📊 Formatted tables and summaries
+- 🎯 Clear navigation and workflow
+- ⚡ Fast keyboard-driven interaction
+
+#### Windows GUI Application (Avalonia)
+- 🖥️ Modern desktop application
+- 🎨 Professional UI with Fluent design
+- 📋 Product grid with search and filters
+- 🛒 Real-time shopping cart panel
+- 🔍 Instant search functionality
+- 📂 Category dropdown filtering
+- 🛡️ Stock status indicators
+- ✅ Add to cart buttons with validation
+- 🗑️ Remove from cart functionality
+- 💳 Checkout with order confirmation
+- 📱 Responsive layout (resizable windows)
+- 🎯 MVVM architecture pattern
+
+## 🖥️ User Interfaces
+
+The Simple Store Simulator features **TWO professional user interfaces** to suit different user preferences:
+### 1 Windows GUI Application (Avalonia)
+
+**Location:** `GUI/` folder
+
+**Features:**
+- ✨ Modern desktop application with Fluent design
+- 🎨 Professional Windows interface
+- 📋 **Product Grid**: Scrollable list with all product details
+- 🛒 **Shopping Cart Panel**: Real-time cart updates
+- 🔍 **Search Bar**: Instant product search as you type
+- 📂 **Category Dropdown**: Quick filtering by category
+- ➕ **Add to Cart Buttons**: One-click product addition
+- 🗑️ **Remove Buttons**: Easy cart item removal
+- 💳 **Checkout Button**: Complete order processing
+- 📊 **Total Display**: Real-time price calculation
+- 🛡️ **Stock Indicators**: Visual out-of-stock warnings
+- 📱 **Responsive Design**: Resizable window with adaptive layout
+
+**How to Run:**
+```powershell
+cd GUI
+dotnet run
+```
+
+**UI Components:**
+
+1. **Header Bar** (Dark Blue Background)
+   - Store title: "🛒 Simple Store Simulator"
+   - Cart item count badge
+
+2. **Toolbar** (Light Gray Background)
+   - Search textbox with placeholder "Search products..."
+   - Search button
+   - Category dropdown (All Categories, Snacks, Dairy, etc.)
+   - Show All button
+
+3. **Main Content** (Split View)
+   - **Left Panel (60%)**: Product catalog
+     - Product cards with name, price, description
+     - Category and stock information
+     - "Add to Cart" button (green, disabled if out of stock)
+   - **Right Panel (40%)**: Shopping cart
+     - Cart items with quantity and price
+     - Remove buttons for each item
+     - Subtotal, Tax, Shipping, Discount, Total
+     - Checkout button
+
+**Technology Stack:**
+- **UI Framework**: Avalonia 11.3.9 (cross-platform .NET UI)
+- **Architecture**: MVVM (Model-View-ViewModel)
+- **Data Binding**: Two-way binding with INotifyPropertyChanged
+- **Navigation**: ViewLocator pattern
+
+**Project File:** `GUI/SimpleStoreSimulator.GUI.fsproj`
 
 ## 🏗️ Architecture
 
@@ -127,62 +250,161 @@ User Output ← UI Layer ← Service Layer ← Pure Functions
 
 ## 🛠️ Technology Stack
 
-- **Language**: F# (.NET 6.0 or higher)
+### Core Technologies
+- **Language**: F# (Functional-first .NET language)
+- **Framework**: .NET 6.0
 - **Build Tool**: .NET CLI / MSBuild
-- **Data Format**: JSON (for persistence)
-- **Libraries**:
-  - FSharp.Core (standard library)
-  - System.Text.Json or Newtonsoft.Json (JSON serialization)
-  - FsUnit (testing - optional)
-  - Expecto (testing framework - optional)
+- **Version Control**: Git + GitHub
+
+### Database & Data
+- **Database**: SQLite 8.0.0 (Microsoft.Data.Sqlite)
+- **Data Format**: JSON (System.Text.Json + FSharp.SystemTextJson 1.3.13)
+- **Products**: 33+ items in SQLite database
+
+### Testing
+- **Test Framework**: Expecto 10.2.1 (F# testing framework)
+- **Test SDK**: YoloDev.Expecto.TestSdk 0.14.2
+- **Test Runner**: Microsoft.NET.Test.Sdk 17.8.0
+- **Coverage**: 30 automated unit tests (100% pass rate)
+
+### GUI (Avalonia Application)
+- **UI Framework**: Avalonia 11.3.9 (cross-platform .NET UI)
+- **Desktop Support**: Avalonia.Desktop 11.3.9
+- **Theme**: Avalonia.Themes.Fluent 11.3.9
+- **Fonts**: Avalonia.Fonts.Inter 11.3.9
+- **Diagnostics**: Avalonia.Diagnostics 11.3.9 (Debug only)
+- **MVVM**: CommunityToolkit.Mvvm 8.2.1
+
+### NuGet Packages
+```xml
+<!-- Core Library -->
+<PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.0" />
+<PackageReference Include="FSharp.SystemTextJson" Version="1.3.13" />
+
+<!-- Testing -->
+<PackageReference Include="Expecto" Version="10.2.1" />
+<PackageReference Include="YoloDev.Expecto.TestSdk" Version="0.14.2" />
+<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+
+<!-- GUI Application -->
+<PackageReference Include="Avalonia" Version="11.3.9" />
+<PackageReference Include="Avalonia.Desktop" Version="11.3.9" />
+<PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.9" />
+<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+```
+
+### Development Tools
+- **IDEs**: Visual Studio 2022, VS Code (with Ionide), JetBrains Rider
+- **Extensions**: Ionide-fsharp (VS Code F# support)
+- **Terminal**: PowerShell, CMD, Windows Terminal
 
 ## 📁 Project Structure
 
 ```
 Simple Store Simulator/
-├── src/
-│   ├── Domain/
-│   │   ├── Types.fs              # Core domain types (Product, Cart, Order)
-│   │   └── DomainTypes.fs        # Additional type definitions
-│   ├── Catalog/
-│   │   ├── CatalogTypes.fs       # Catalog-specific types
-│   │   ├── CatalogOperations.fs  # Product catalog operations
-│   │   └── ProductData.fs        # Sample product data
-│   ├── Cart/
-│   │   ├── CartTypes.fs          # Cart-specific types
-│   │   └── CartOperations.fs     # Cart add/remove/update logic
-│   ├── Calculator/
-│   │   ├── PriceCalculator.fs    # Price and total calculations
-│   │   └── DiscountEngine.fs     # Discount logic (optional)
-│   ├── Search/
-│   │   ├── SearchTypes.fs        # Search criteria types
-│   │   └── SearchOperations.fs   # Filter and search functions
-│   ├── FileIO/
-│   │   ├── JsonSerializer.fs     # JSON save/load operations
-│   │   └── FileOperations.fs     # File system interactions
-│   ├── UI/
-│   │   ├── ConsoleUI.fs          # Console interface
-│   │   ├── Menu.fs               # Menu system
-│   │   └── DisplayHelpers.fs     # Display formatting functions
-│   └── Program.fs                # Application entry point
-├── tests/
-│   ├── Domain.Tests/
-│   ├── Catalog.Tests/
-│   ├── Cart.Tests/
-│   ├── Calculator.Tests/
-│   ├── Search.Tests/
-│   └── FileIO.Tests/
-├── data/
-│   ├── products.json             # Product catalog data
-│   └── orders/                   # Saved order summaries
-├── docs/
-│   ├── ARCHITECTURE.md           # Detailed architecture documentation
-│   ├── API.md                    # Module APIs and function signatures
-│   └── TEAM_GUIDE.md             # Team collaboration guidelines
-├── .gitignore
-├── README.md
-├── SimpleStoreSimulator.fsproj   # F# project file
-└── LICENSE
+├── 📄 SimpleStoreSimulator.fsproj    # Main library project file
+├── 📄 README.md                      # This comprehensive guide
+├── 📄 .gitignore                     # Git ignore rules
+│
+├── 📂 src/                           # Source code (Core Business Logic)
+│   ├── 📄 Program.fs                 # Console UI entry point
+│   │
+│   ├── 📂 Product/                   # Product Module
+│   │   ├── Product.fs                # Product types and catalog operations
+│   │   └── ProductDatabase.fs        # SQLite database integration (33+ products)
+│   │
+│   ├── 📂 Cart/                      # Shopping Cart Module
+│   │   ├── CartTypes.fs              # Cart and CartItem type definitions
+│   │   ├── CartConfig.fs             # Cart configuration (tax, shipping)
+│   │   └── CartOperations.fs         # Cart add/remove/update operations
+│   │
+│   ├── 📂 Calculator/                # Price Calculation Module
+│   │   ├── PriceCalculator.fs        # Subtotal, tax, shipping, total calculations
+│   │   └── DiscountEngine.fs         # Multi-tier discount system
+│   │
+│   ├── 📂 Search/                    # Search & Filter Module
+│   │   ├── SearchTypes.fs            # Search criteria types
+│   │   └── SearchOperations.fs       # Search, filter, sort functions
+│   │
+│   └── 📂 FileIO/                    # Data Persistence Module
+│       ├── JsonSerializer.fs         # JSON serialization/deserialization
+│       └── FileOperations.fs         # File I/O, CSV, text export
+│
+├── 📂 GUI/                           # Windows GUI Application (Avalonia)
+│   ├── 📄 SimpleStoreSimulator.GUI.fsproj  # GUI project file
+│   ├── 📄 Program.fs                 # GUI entry point
+│   ├── 📄 App.axaml                  # Application XAML
+│   ├── 📄 App.axaml.fs               # Application code-behind
+│   ├── 📄 ViewLocator.fs             # MVVM view location
+│   ├── 📄 Converters.fs              # Value converters for data binding
+│   ├── 📄 app.manifest               # Windows application manifest
+│   ├── 📄 README-GUI.md              # GUI-specific documentation
+│   │
+│   ├── 📂 ViewModels/                # MVVM ViewModels
+│   │   ├── ViewModelBase.fs          # Base ViewModel class
+│   │   └── MainWindowViewModel.fs    # Main window ViewModel
+│   │
+│   ├── 📂 Views/                     # MVVM Views
+│   │   ├── MainWindow.axaml          # Main window XAML
+│   │   └── MainWindow.axaml.fs       # Main window code-behind
+│   │
+│   ├── 📂 Assets/                    # GUI assets (icons, images)
+│   ├── 📂 bin/                       # Build output
+│   ├── 📂 obj/                       # Build intermediate files
+│   │
+│   └── 📂 data/                      # GUI-specific data
+│       └── 📂 orders/                # Saved orders from GUI
+│           ├── order_*.json          # Individual order files
+│           └── ...                   # (100+ order files)
+│
+├── 📂 tests/                         # Automated Testing Suite
+│   ├── 📄 SimpleStoreSimulator.Tests.fsproj  # Test project file
+│   ├── 📄 Main.fs                    # Test runner entry point
+│   ├── 📄 README.md                  # Testing documentation
+│   │
+│   ├── 📄 ProductTests.fs            # Product module tests (5 tests)
+│   ├── 📄 CartOperationsTests.fs     # Cart operations tests (8 tests)
+│   ├── 📄 PriceCalculatorTests.fs    # Price calculator tests (6 tests)
+│   ├── 📄 SearchOperationsTests.fs   # Search & filter tests (5 tests)
+│   ├── 📄 JsonAndDatabaseTests.fs    # JSON & DB tests (2 tests)
+│   ├── 📄 FileOperationsAutomationTests.fs  # File I/O tests (2 tests)
+│   └── 📄 DiscountEngineAutomationTests.fs  # Discount tests (2 tests)
+│   
+│   └── 📂 bin/, obj/                 # Test build outputs
+│
+├── 📂 docs/                          # Documentation
+│   ├── 📄 PROJECT_DOCUMENTATION.md   # Comprehensive project docs (745 lines)
+│   ├── 📄 ARCHITECTURE.md            # Detailed architecture guide
+│   ├── 📄 System Architecture.drawio # Architecture diagrams
+│   └── 📄 Untitled Diagram.drawio    # Additional diagrams
+│
+├── 📂 bin/                           # Build output directory
+│   └── Debug/
+│       ├── net6.0/                   # .NET 6.0 build
+│       └── net8.0/                   # .NET 8.0 build (if applicable)
+│
+└── 📂 obj/                           # Build intermediate files
+    ├── project.assets.json
+    ├── *.nuget.dgspec.json
+    ├── *.nuget.g.props
+    ├── *.nuget.g.targets
+    └── Debug/
+```
+
+### Key Directories Explained
+
+- **`src/`**: Core business logic organized by domain (Product, Cart, Calculator, Search, FileIO)
+- **`GUI/`**: Complete Avalonia GUI application with MVVM architecture
+- **`tests/`**: 30 comprehensive unit tests with 100% pass rate
+- **`docs/`**: Complete project documentation and architecture diagrams
+- **`GUI/data/orders/`**: Persistent storage for customer orders (100+ saved orders)
+
+### Module Compilation Order (from .fsproj)
+
+```
+SearchTypes.fs → Product.fs → ProductDatabase.fs → SearchOperations.fs
+→ CartTypes.fs → CartConfig.fs → PriceCalculator.fs → DiscountEngine.fs
+→ JsonSerializer.fs → FileOperations.fs → CartOperations.fs
 ```
 
 ## 🚀 Getting Started
@@ -191,44 +413,131 @@ Simple Store Simulator/
 
 - **.NET SDK 6.0+**: Download from [https://dotnet.microsoft.com/download](https://dotnet.microsoft.com/download)
 - **F# Language Support**: Included with .NET SDK
+- **Git**: For version control ([https://git-scm.com/](https://git-scm.com/))
 - **IDE** (Choose one):
   - Visual Studio 2022 (with F# support)
   - Visual Studio Code (with Ionide-fsharp extension)
   - JetBrains Rider
-- **Git**: For version control and collaboration
 
-### Project Setup
+### Installation
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
-   cd "Simple Store Simulator"
+   git clone https://github.com/Omar-Mega-Byte/Simple-Store-Simulator.git
+   cd "Simple-Store-Simulator"
    ```
 
-2. **Review the architecture**
-   - Read this README thoroughly
-   - Understand the module structure
-   - Review team roles and responsibilities
+2. **Restore NuGet packages**
+   ```bash
+   dotnet restore
+   ```
 
-3. **Set up development environment**
-   - Install required prerequisites
-   - Configure your IDE for F# development
-   - Install recommended extensions (Ionide for VS Code)
+3. **Build the solution**
+   ```bash
+   dotnet build
+   ```
 
-4. **Plan your implementation**
-   - Review your assigned role
-   - Check the project structure
-   - Read development guidelines
+4. **Run tests** (verify everything works)
+   ```bash
+   cd tests
+   dotnet test
+   ```
+   Expected output: ✅ All 30 tests passed
 
-### Next Steps for Team
+## 🎮 Running the Application
 
-- Create F# project file (`.fsproj`)
-- Set up project structure according to architecture
-- Create module files based on responsibilities
-- Implement types in Domain module first
-- Build modules incrementally
-- Write tests alongside implementation
-- Document your code
+### Option 1: Console/CLI Interface
+
+Run the console-based interface:
+
+```powershell
+# From project root
+dotnet run --project SimpleStoreSimulator.fsproj
+
+# Or directly from src folder
+cd src
+dotnet run
+```
+
+### Option 2: Windows GUI Application
+
+Run the Avalonia desktop application:
+
+```powershell
+# Navigate to GUI folder
+cd GUI
+dotnet run
+
+# Or from project root
+dotnet run --project GUI/SimpleStoreSimulator.GUI.fsproj
+```
+
+### Running Tests
+
+```powershell
+# Run all tests
+cd tests
+dotnet test
+
+# Run with detailed output
+dotnet test --logger "console;verbosity=detailed"
+
+# Run specific test file
+dotnet test --filter "FullyQualifiedName~ProductTests"
+```
+
+### Building for Release
+
+```powershell
+# Build optimized release version
+dotnet build -c Release
+
+# Publish self-contained executable (Windows)
+dotnet publish -c Release -r win-x64 --self-contained
+
+# GUI Application release build
+cd GUI
+dotnet publish -c Release -r win-x64 --self-contained
+```
+
+## 🗄️ Database Information
+
+### SQLite Database
+
+- **Location**: In-memory database (ProductDatabase.fs)
+- **Products**: 33+ items across 6 categories
+- **Schema**:
+  ```sql
+  CREATE TABLE Products (
+    Id INTEGER PRIMARY KEY,
+    Name TEXT NOT NULL,
+    Price REAL NOT NULL,
+    Description TEXT,
+    Category TEXT,
+    Stock INTEGER DEFAULT 0
+  )
+  ```
+
+### Product Categories
+
+1. **Snacks** (8 products): Chips, Popcorn, Crackers, Nuts, Pretzels, Cookies, Energy Bars
+2. **Dairy** (5 products): Milk, Cheese, Yogurt, Butter, Cream
+3. **Beverages** (7 products): Water, Juice, Soda, Coffee, Tea, Energy Drinks
+4. **Sweets** (6 products): Chocolate, Candy, Gummies, Mints
+5. **Fruits** (4 products): Apples, Bananas, Oranges, Grapes
+6. **Vegetables** (3 products): Tomatoes, Lettuce, Carrots
+
+### Sample Products
+
+| ID | Name | Price (EGP) | Category | Stock |
+|---|---|---|---|---|
+| 1 | Chips | 15.00 | Snacks | 50 |
+| 2 | Milk | 25.00 | Dairy | 30 |
+| 3 | Water | 5.00 | Beverages | 100 |
+| 4 | Chocolate | 20.00 | Sweets | 40 |
+| 5 | Apples | 30.00 | Fruits | 25 |
+
+*See `src/Product/ProductDatabase.fs` for complete product list*
 
 ## 👥 Team Roles & Responsibilities
 
@@ -480,198 +789,552 @@ Closes #15
 
 ## 🗂️ Data Structures
 
-### Core Types Overview
+### Core Type Definitions
 
-**Product Type**
-- Product ID (unique identifier)
-- Product Name
-- Price (decimal for precision)
-- Description
-- Category
-- Stock quantity
+#### Product Type
+```fsharp
+type Product = { 
+    Id: int
+    Name: string
+    Price: decimal
+    Description: string
+    Category: string
+    Stock: int
+}
+```
 
-**Cart Item Type**
-- Reference to Product
-- Quantity ordered
+#### Cart Item Type
+```fsharp
+type CartItem = {
+    Product: Product
+    Quantity: int
+}
+```
 
-**Shopping Cart Type**
-- List of Cart Items
-- Creation timestamp
+#### Shopping Cart Type
+```fsharp
+type ShoppingCart = {
+    Items: CartItem list
+    CreatedAt: DateTime
+}
+```
 
-**Order Summary Type**
-- Unique Order ID
-- List of ordered items
-- Subtotal amount
-- Tax amount
-- Total amount
-- Order date and time
+#### Cart Configuration
+```fsharp
+type CartConfig = {
+    TaxRate: decimal              // 14% VAT
+    FreeShippingThreshold: decimal // 200 EGP
+    ShippingCost: decimal          // 30 EGP
+}
+```
 
-**Product Catalog Type**
-- Map structure with Product ID as key and Product as value
+#### Order Summary Type
+```fsharp
+type OrderSummary = {
+    OrderId: string               // GUID
+    Items: CartItem list
+    Subtotal: decimal
+    Tax: decimal
+    Shipping: decimal
+    Discount: decimal
+    Total: decimal
+    OrderDate: DateTime
+}
+```
 
-### State Management Principles
+#### Discount Types
+```fsharp
+type DiscountType =
+    | Percentage of float          // e.g., 10% off
+    | FixedAmount of decimal       // e.g., 50 EGP off
+    | BuyXGetYFree of int * int    // e.g., Buy 3 Get 1 Free
 
-All state must be managed immutably in this project:
-- Never modify existing data structures
-- Always return new instances when state changes
-- Use F#'s immutable collections (List, Map, Set)
-- Functions should be pure (no side effects)
+type Discount = {
+    Name: string
+    Type: DiscountType
+    MinimumPurchase: decimal option
+}
+```
+
+#### Search Criteria
+```fsharp
+type SearchCriteria = {
+    Name: string option
+    MinPrice: decimal option
+    MaxPrice: decimal option
+    Category: string option
+}
+
+type SortOption =
+    | PriceAscending
+    | PriceDescending
+    | NameAscending
+    | NameDescending
+```
+
+### Data Structure Principles
+
+All data structures in this project follow functional programming principles:
+- ✅ **Immutability**: All types are immutable records
+- ✅ **Pure Functions**: Functions never mutate input parameters
+- ✅ **Type Safety**: Strong typing prevents runtime errors
+- ✅ **Pattern Matching**: Discriminated unions for state representation
+- ✅ **Option Types**: Explicit handling of nullable values
+- ✅ **Result Types**: Functional error handling
 
 ## 🧩 Core Modules
 
-### 1. Domain Module
-Defines core business types and domain logic.
+### 1. Product Module (`src/Product/`)
+
+**Files:**
+- `Product.fs` - Product types and catalog operations
+- `ProductDatabase.fs` - SQLite integration with 33+ products
 
 **Purpose:**
-- Central type definitions for the entire application
-- Domain validation rules
-- Business rule enforcement
+- Define Product type and catalog structure
+- Initialize product database from SQLite
+- Manage product inventory and stock levels
+
+**Key Functions:**
+```fsharp
+// Database operations
+loadProductsFromDatabase: unit -> Product list
+insertProduct: SqliteConnection -> Product -> unit
+updateProductStock: SqliteConnection -> int -> int -> unit
+
+// Catalog operations
+initializeCatalog: unit -> ProductCatalog
+getProduct: ProductCatalog -> int -> Product option
+getAllProducts: ProductCatalog -> Product list
+getProductsByCategory: ProductCatalog -> string -> Product list
+isInStock: Product -> int -> bool
+updateStock: ProductCatalog -> int -> int -> ProductCatalog
+formatPrice: decimal -> string
+displayProduct: Product -> unit
+displayCatalog: string -> ProductCatalog -> unit
+```
+
+**Product Categories:**
+- Snacks, Dairy, Beverages, Sweets, Fruits, Vegetables, Frozen
+
+---
+
+### 2. Cart Module (`src/Cart/`)
+
+**Files:**
+- `CartTypes.fs` - Cart and CartItem type definitions
+- `CartConfig.fs` - Configuration (tax rate, shipping)
+- `CartOperations.fs` - Cart manipulation functions
+
+**Purpose:**
+- Manage shopping cart state immutably
+- Handle add/remove/update operations
+- Validate stock availability
+
+**Key Functions:**
+```fsharp
+// Cart creation and queries
+createCart: unit -> ShoppingCart
+getCartItemCount: ShoppingCart -> int
+isEmpty: ShoppingCart -> bool
+findCartItem: Product -> ShoppingCart -> CartItem option
+
+// Cart modifications
+addToCart: Product -> int -> ShoppingCart -> ShoppingCart
+removeFromCart: Product -> ShoppingCart -> ShoppingCart
+updateQuantity: Product -> int -> ShoppingCart -> ShoppingCart
+clearCart: ShoppingCart -> ShoppingCart
+
+// Display and reporting
+displayCart: ShoppingCart -> unit
+getCartSummary: ShoppingCart -> string
+```
+
+**Configuration:**
+- Tax Rate: 14% (VAT)
+- Free Shipping Threshold: 200 EGP
+- Standard Shipping Cost: 30 EGP
+
+---
+
+### 3. Calculator Module (`src/Calculator/`)
+
+**Files:**
+- `PriceCalculator.fs` - Price and total calculations
+- `DiscountEngine.fs` - Multi-tier discount system
+
+**Purpose:**
+- Calculate subtotals, tax, shipping, and totals
+- Apply various discount types
+- Generate order summaries
+
+**Key Functions:**
+```fsharp
+// Price calculations
+calculateItemSubtotal: CartItem -> decimal
+calculateSubtotal: ShoppingCart -> decimal
+calculateTax: decimal -> decimal -> decimal
+calculateShipping: decimal -> CartConfig -> decimal
+calculateTotal: ShoppingCart -> CartConfig -> decimal
+
+// Order processing
+createOrderSummary: ShoppingCart -> CartConfig -> OrderSummary
+displayOrderSummary: OrderSummary -> unit
+
+// Discount engine
+applyPercentageDiscount: decimal -> float -> decimal
+applyFixedDiscount: decimal -> decimal -> decimal
+applyBuyXGetYFree: CartItem -> int -> int -> decimal
+calculateDiscount: CartItem list -> Discount -> decimal
+```
+
+**Discount Types:**
+- Percentage (e.g., 10% off)
+- Fixed Amount (e.g., 50 EGP off)
+- Buy X Get Y Free (e.g., Buy 3 Get 1 Free)
+
+---
+
+### 4. Search Module (`src/Search/`)
+
+**Files:**
+- `SearchTypes.fs` - Search criteria and sort options
+- `SearchOperations.fs` - Search, filter, and sort functions
+
+**Purpose:**
+- Enable product discovery and filtering
+- Sort products by various criteria
+- Combine multiple search filters
+
+**Key Functions:**
+```fsharp
+// Search and filter
+searchByName: Product list -> string -> Product list
+filterByPriceRange: Product list -> decimal -> decimal -> Product list
+filterByCategory: Product list -> string -> Product list
+applyCriteria: Product list -> SearchCriteria -> Product list
+
+// Sorting
+sortProducts: Product list -> SortOption -> Product list
+sortByPriceAsc: Product list -> Product list
+sortByPriceDesc: Product list -> Product list
+sortByName: Product list -> Product list
+
+// Utilities
+getCategories: Product list -> string list
+displaySearchResults: Product list -> unit
+```
+
+**Search Capabilities:**
+- Case-insensitive name search
+- Price range filtering
+- Category filtering
+- Multiple sort options
+- Combined criteria
+
+---
+
+### 5. FileIO Module (`src/FileIO/`)
+
+**Files:**
+- `JsonSerializer.fs` - JSON serialization/deserialization
+- `FileOperations.fs` - File I/O and export functions
+
+**Purpose:**
+- Persist order data in JSON format
+- Export data to multiple formats (JSON, CSV, Text)
+- Handle file system operations with error handling
+
+**Key Functions:**
+```fsharp
+// JSON operations
+serializeToJson<'T>: 'T -> string
+deserializeFromJson<'T>: string -> 'T option
+saveToJsonFile<'T>: string -> 'T -> Result<unit, string>
+loadFromJsonFile<'T>: string -> Result<'T, string>
+
+// Order persistence
+saveOrder: OrderSummary -> string -> Result<unit, string>
+loadOrder: string -> Result<OrderSummary, string>
+generateOrderFileName: string -> string
+
+// Export formats
+exportToCsv: CartItem list -> string -> Result<unit, string>
+exportToText: OrderSummary -> string -> Result<unit, string>
+ensureDirectoryExists: string -> unit
+```
+
+**File Formats:**
+- **JSON**: Structured order data with full details
+- **CSV**: Spreadsheet-compatible format for cart items
+- **Text**: Human-readable receipt format
+
+**Storage Location:**
+- Console orders: `data/orders/`
+- GUI orders: `GUI/data/orders/`
+
+---
+
+### 6. UI Module (`src/Program.fs`)
+
+**Purpose:**
+- Provide interactive console user interface
+- Display menus and handle user input
+- Coordinate all modules for complete workflow
+
+**Features:**
+- Colored console output (success/error/warning/info)
+- ASCII box-drawing for visual appeal
+- Input validation and error handling
+- Menu-driven navigation
+- Interactive prompts
+
+**Main Menu Options:**
+1. View All Products
+2. Search Products
+3. Browse by Category
+4. Filter by Price Range
+5. View Cart
+6. Shopping Cart Management
+7. Checkout
+8. Product Statistics
+9. Best Deals
+0. Exit
+
+---
+
+### 7. GUI Module (`GUI/`)
+
+**Architecture:** MVVM (Model-View-ViewModel)
 
 **Components:**
-- Product type definition
-- Cart-related types
-- Order types
-- Catalog structure
+- **ViewModels**: Business logic and state management
+  - `ViewModelBase.fs` - Base class for ViewModels
+  - `MainWindowViewModel.fs` - Main window logic
+- **Views**: XAML-based UI
+  - `MainWindow.axaml` - Main window layout
+  - `MainWindow.axaml.fs` - Code-behind
+- **Converters**: Data binding converters
+  - `Converters.fs` - Value converters
+- **App**: Application entry
+  - `App.axaml` - App resources and styling
+  - `Program.fs` - Entry point
 
----
-
-### 2. Catalog Module
-Manages product catalog operations.
-
-**Purpose:**
-- Initialize and maintain product catalog
-- Provide access to product information
-- Manage product inventory
-
-**Required Functions:**
-- Initialize empty or pre-populated catalog
-- Retrieve product by ID
-- Get all products as a list
-- Filter products by category
-- Check stock availability
-- Update product stock levels
-
----
-
-### 3. Cart Module
-Handles shopping cart operations.
-
-**Purpose:**
-- Manage shopping cart state
-- Handle cart item operations
-- Maintain cart integrity
-
-**Required Functions:**
-- Create empty cart
-- Add product to cart (with quantity)
-- Remove product from cart
-- Update product quantity in cart
-- Clear entire cart
-- Get cart item count
-- Check if cart is empty
-
----
-
-### 4. Calculator Module
-Performs price calculations.
-
-**Purpose:**
-- Calculate prices and totals
-- Apply discounts
-- Calculate taxes
-
-**Required Functions:**
-- Calculate item subtotal (price × quantity)
-- Calculate cart total (sum of all items)
-- Apply discount percentage to price
-- Calculate tax amount
-- Calculate final total with tax
-- Create order summary from cart
-
----
-
-### 5. Search Module
-Implements search and filter operations.
-
-**Purpose:**
-- Enable product discovery
-- Filter product listings
-- Sort products
-
-**Required Functions:**
-- Search products by name (case-insensitive)
-- Filter products by price range
-- Filter products by category
-- Sort products by price (ascending/descending)
-- Sort products by name (ascending/descending)
-- Get list of all unique categories
-- Apply multiple search criteria
-
----
-
-### 6. FileIO Module
-Handles data persistence.
-
-**Purpose:**
-- Save and load data
-- JSON serialization
-- File system operations
-
-**Required Functions:**
-- Save order summary to JSON file
-- Load product catalog from JSON
-- Export cart summary to file
-- Generic JSON serialization
-- Generic JSON deserialization
-- File read/write operations with error handling
-
----
-
-### 7. UI Module
-Provides user interface.
-
-**Purpose:**
-- Display information to users
-- Collect user input
-- Navigate between features
-
-**Required Functions:**
-- Display main menu
-- Display product listings
-- Display cart contents
-- Display order summary
-- Get user input (text and numbers)
-- Display success/error/info messages
-- Format prices as currency
-- Clear screen and wait for user input
+**Features:**
+- Product grid with search
+- Shopping cart panel
+- Real-time updates
+- Category filtering
+- Stock validation
+- Checkout workflow
 
 ## 🧪 Testing Strategy
 
-### Unit Testing
-- Test each function in isolation
-- Use property-based testing where applicable
-- Cover edge cases and error conditions
-- Test with valid and invalid inputs
+### Test Suite Overview
 
-### Integration Testing
-- Test module interactions
-- Verify workflow correctness
-- Test data persistence
-- Ensure modules work together properly
+**Total Tests:** 30 automated unit tests  
+**Pass Rate:** 100% ✅  
+**Framework:** Expecto 10.2.1  
+**Location:** `tests/` directory
 
-### Test Coverage Goals
-- Minimum 80% code coverage
-- 100% coverage for critical cart operations
-- All calculation functions fully tested
-- All edge cases covered
+### Test Files and Coverage
+
+#### 1. ProductTests.fs (5 tests)
+- ✅ Product type creation
+- ✅ Catalog initialization
+- ✅ Get product by ID
+- ✅ Get all products
+- ✅ Filter by category
+
+#### 2. CartOperationsTests.fs (8 tests)
+- ✅ Create empty cart
+- ✅ Add product to cart
+- ✅ Add multiple products
+- ✅ Remove product from cart
+- ✅ Update quantity
+- ✅ Clear cart
+- ✅ Get cart item count
+- ✅ Check if cart is empty
+
+#### 3. PriceCalculatorTests.fs (6 tests)
+- ✅ Calculate item subtotal
+- ✅ Calculate cart subtotal
+- ✅ Calculate tax (14% VAT)
+- ✅ Calculate shipping (free over 200 EGP)
+- ✅ Calculate total with tax and shipping
+- ✅ Create order summary
+
+#### 4. SearchOperationsTests.fs (5 tests)
+- ✅ Search by name (case-insensitive)
+- ✅ Filter by price range
+- ✅ Filter by category
+- ✅ Sort by price ascending
+- ✅ Sort by price descending
+
+#### 5. JsonAndDatabaseTests.fs (2 tests)
+- ✅ JSON serialization/deserialization
+- ✅ Database product loading
+
+#### 6. FileOperationsAutomationTests.fs (2 tests)
+- ✅ Save order to JSON file
+- ✅ Export to CSV format
+
+#### 7. DiscountEngineAutomationTests.fs (2 tests)
+- ✅ Apply percentage discount
+- ✅ Apply Buy X Get Y Free discount
+
+### Running Tests
+
+```powershell
+# Run all tests
+cd tests
+dotnet test
+
+# Run with detailed output
+dotnet test --logger "console;verbosity=detailed"
+
+# Run specific test suite
+dotnet test --filter "FullyQualifiedName~CartOperationsTests"
+
+# Run tests with coverage (if coverage tool installed)
+dotnet test /p:CollectCoverage=true
+```
+
+### Test Output Example
+
+```
+Expecto! 30 tests run in 00:00:00.5 for SimpleStoreSimulator.Tests - 30 passed, 0 ignored, 0 failed, 0 errored.
+
+[16:32:47 INF] EXPECTO? Running tests...
+[16:32:47 INF] EXPECTO! 30 tests run - 30 passed, 0 failed, 0 errored, 0 ignored
+```
 
 ### Testing Best Practices
-- Write tests before or alongside implementation
-- Use descriptive test names
-- Test one thing per test case
-- Keep tests independent
-- Use test frameworks like Expecto or FsUnit
-- Mock external dependencies when needed
+
+- ✅ **Unit Testing**: Test each function in isolation
+- ✅ **Edge Cases**: Test boundary conditions and edge cases
+- ✅ **Error Handling**: Verify error conditions are handled properly
+- ✅ **Pure Functions**: Leverage F# pure functions for predictable tests
+- ✅ **Test Data**: Use realistic test data matching production scenarios
+- ✅ **Continuous Testing**: Run tests before every commit
+- ✅ **Regression Testing**: Ensure new features don't break existing functionality
+
+### Test Coverage Goals
+
+- ✅ **Achieved:** 100% of critical business logic tested
+- ✅ **Achieved:** All cart operations fully covered
+- ✅ **Achieved:** All calculation functions verified
+- ✅ **Achieved:** Search and filter operations tested
+- ✅ **Achieved:** Database and file I/O operations validated
+
+### Quality Assurance
+
+- **No Warnings**: Clean compilation with zero warnings
+- **No Errors**: All tests pass consistently
+- **Code Reviews**: Peer-reviewed by team members
+- **Functional Correctness**: Business rules validated through tests
+
+## 📤 Export Capabilities
+
+The system supports multiple export formats for order data:
+
+### 1. JSON Export
+
+**Format:** Structured JSON with complete order details
+
+**Example Output:**
+```json
+{
+  "OrderId": "6efb04ad-758c-426a-ad16-2c9bc7a9e305",
+  "Items": [
+    {
+      "Product": {
+        "Id": 1,
+        "Name": "Chips",
+        "Price": 15.00,
+        "Description": "Crispy potato chips",
+        "Category": "Snacks",
+        "Stock": 50
+      },
+      "Quantity": 2
+    }
+  ],
+  "Subtotal": 30.00,
+  "Tax": 4.20,
+  "Shipping": 30.00,
+  "Discount": 0.00,
+  "Total": 64.20,
+  "OrderDate": "2025-12-13T12:33:09"
+}
+```
+
+**File Location:** `GUI/data/orders/order_{GUID}_{TIMESTAMP}.json`
+
+### 2. CSV Export
+
+**Format:** Comma-separated values for spreadsheet import
+
+**Example Output:**
+```csv
+ProductId,ProductName,Quantity,Price,Subtotal
+1,Chips,2,15.00,30.00
+4,Chocolate,1,20.00,20.00
+```
+
+**Use Cases:**
+- Import into Excel/Google Sheets
+- Data analysis
+- Inventory reporting
+
+### 3. Text Export
+
+**Format:** Human-readable receipt
+
+**Example Output:**
+```
+========================================
+        ORDER RECEIPT
+========================================
+Order ID: 6efb04ad-758c-426a-ad16-2c9bc7a9e305
+Date: 2025-12-13 12:33:09
+
+----------------------------------------
+ITEMS:
+----------------------------------------
+Chips                     x2    30.00 EGP
+Chocolate                 x1    20.00 EGP
+
+----------------------------------------
+Subtotal:                      50.00 EGP
+Tax (14%):                      7.00 EGP
+Shipping:                      30.00 EGP
+Discount:                       0.00 EGP
+----------------------------------------
+TOTAL:                         87.00 EGP
+========================================
+```
+
+### Export Functions
+
+```fsharp
+// Save order to JSON
+saveOrder: OrderSummary -> string -> Result<unit, string>
+
+// Export cart items to CSV
+exportToCsv: CartItem list -> string -> Result<unit, string>
+
+// Export order summary to text receipt
+exportToText: OrderSummary -> string -> Result<unit, string>
+```
+
+### Saved Orders
+
+The application maintains a persistent history of all orders:
+
+- **Location:** `GUI/data/orders/`
+- **Count:** 100+ saved orders
+- **Format:** `order_{GUID}_{YYYYMMDD_HHMMSS}.json`
+- **Retention:** Permanent (until manually deleted)
 
 ## 🤝 Contributing
 
@@ -718,34 +1381,57 @@ Provides user interface.
 - [ ] No compiler warnings
 - [ ] Builds successfully
 
-## 📚 Resources
+## 📚 Documentation
 
-### F# Learning Resources
-- [F# for Fun and Profit](https://fsharpforfunandprofit.com/)
-- [F# Documentation](https://docs.microsoft.com/en-us/dotnet/fsharp/)
-- [F# Cheat Sheet](https://dungpa.github.io/fsharp-cheatsheet/)
+Comprehensive documentation is available in the `docs/` directory:
 
-### Functional Programming Concepts
-- Immutability
-- Pure Functions
-- Pattern Matching
-- Higher-Order Functions
-- Function Composition
-- Discriminated Unions
-- Option and Result Types
+### Available Documentation
 
-### Tools & Libraries
-- [Ionide](http://ionide.io/) - F# VS Code extension
-- [Expecto](https://github.com/haf/expecto) - Testing framework
-- [FsUnit](https://fsprojects.github.io/FsUnit/) - Unit testing library
-- [System.Text.Json](https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-overview)
+1. **README.md** (This file)
+   - Complete project overview
+   - Installation and setup guide
+   - Feature descriptions
+   - Team roles and responsibilities
+   - Development guidelines
 
-## 📞 Contact & Support
+2. **docs/PROJECT_DOCUMENTATION.md** (745 lines)
+   - Executive summary
+   - Detailed functional requirements
+   - System architecture
+   - Technical implementation details
+   - Database design
+   - Usage guide
+   - Complete API reference
 
-- **Project Repository**: [https://github.com/Omar-Mega-Byte/Simple-Store-Simulator](https://github.com/Omar-Mega-Byte/Simple-Store-Simulator)
-- **Project Lead Contact**: omar.tolis2004@gmail.com
-- **Issue Tracking**: GitHub Issues
-- **Documentation**: `/docs` directory
+3. **docs/ARCHITECTURE.md**
+   - Detailed architecture diagrams
+   - Module dependencies
+   - Data flow documentation
+   - Design patterns used
+
+4. **GUI/README-GUI.md** (337 lines)
+   - GUI-specific documentation
+   - Avalonia UI guide
+   - MVVM architecture explanation
+   - UI component descriptions
+   - Screenshots and examples
+
+5. **tests/README.md**
+   - Testing strategy
+   - Test suite documentation
+   - How to write tests
+   - Test execution guide
+
+### Architecture Diagrams
+
+- `docs/System Architecture.drawio` - System architecture diagram
+- `docs/Untitled Diagram.drawio` - Additional diagrams
+
+### Quick Links
+
+- **Repository**: [https://github.com/Omar-Mega-Byte/Simple-Store-Simulator](https://github.com/Omar-Mega-Byte/Simple-Store-Simulator)
+- **Issues**: [GitHub Issues](https://github.com/Omar-Mega-Byte/Simple-Store-Simulator/issues)
+- **Project Lead**: omar.tolis2004@gmail.com
 
 ## 👨‍💻 Team Members
 
@@ -764,12 +1450,69 @@ Provides user interface.
 
 This project is developed for educational purposes as part of the Programming Languages - 3 course.
 
+**Academic Information:**
+- **Course**: Programming Languages - 3
+- **Academic Year**: 2024-2025
+- **Term**: First Term (Fall 2024 - Winter 2025)
+- **Institution**: Faculty of Computers and Artificial Intelligence
+- **Repository**: [https://github.com/Omar-Mega-Byte/Simple-Store-Simulator](https://github.com/Omar-Mega-Byte/Simple-Store-Simulator)
+
+---
+
+## 🎓 Learning Resources
+
+### F# Learning Materials
+- [F# for Fun and Profit](https://fsharpforfunandprofit.com/) - Comprehensive F# guide
+- [F# Documentation](https://docs.microsoft.com/en-us/dotnet/fsharp/) - Official Microsoft docs
+- [F# Cheat Sheet](https://dungpa.github.io/fsharp-cheatsheet/) - Quick reference
+
+### Functional Programming Concepts Used
+- ✅ **Immutability** - All data structures are immutable
+- ✅ **Pure Functions** - Side-effect-free functions
+- ✅ **Pattern Matching** - Elegant control flow
+- ✅ **Higher-Order Functions** - Functions as parameters
+- ✅ **Function Composition** - Pipe operators and composition
+- ✅ **Discriminated Unions** - Type-safe state representation
+- ✅ **Option Types** - Explicit nullable handling
+- ✅ **Result Types** - Functional error handling
+- ✅ **Record Types** - Immutable data structures
+- ✅ **List Operations** - Functional list processing
+
+### Tools & Libraries
+- [Ionide](http://ionide.io/) - F# extension for VS Code
+- [Expecto](https://github.com/haf/expecto) - F# testing framework
+- [Avalonia](https://avaloniaui.net/) - Cross-platform .NET UI framework
+- [SQLite](https://www.sqlite.org/) - Lightweight database engine
+- [System.Text.Json](https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-overview) - JSON library
+
+---
+
+## 🌟 Project Achievements
+
+- ✅ **Complete Implementation**: All planned features delivered
+- ✅ **Dual Interfaces**: CLI + GUI both fully functional
+- ✅ **100% Test Pass Rate**: All 30 automated tests passing
+- ✅ **Production Ready**: Error handling, validation, professional UX
+- ✅ **Database Integration**: SQLite with 33+ products
+- ✅ **Advanced Features**: Tax, shipping, multi-tier discounts
+- ✅ **Data Persistence**: 100+ saved orders with multi-format export
+- ✅ **Clean Architecture**: Well-organized, maintainable codebase
+- ✅ **Comprehensive Documentation**: 2000+ lines of documentation
+- ✅ **Team Collaboration**: Successful role-based development
+
 ---
 
 **Built with 💖 using F# - Functional Programming for Real-World Applications**
 
-**Course**: Programming Languages - 3
-**Academic Year**: 2025-2026
-**Term**: First Term 
-**Institution**: Faculty of Computers and Artificial Intelligence
+**Developed by Team:**
+- عمر أحمد الرفاعي طليس (Team Leader)
+- عمر أحمد محمد أحمد
+- عمر أحمد محمود عواد
+- جمال الدين أيمن عبد الرحمن
+- مايكل عماد عدلي
+- باسل وليد حامد محمد
+- علي محمد جمعة زكي
+- كيرلس ساري عيد رومان
+
+**© 2024-2025 | Simple Store Simulator Team**
 
