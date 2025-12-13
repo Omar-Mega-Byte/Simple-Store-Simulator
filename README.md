@@ -1,6 +1,6 @@
 # Simple Store Simulator 🛒
 
-A comprehensive F# e-commerce simulation system with dual user interfaces (Console CLI + Modern GUI), SQLite database integration, advanced price calculation engine, and complete order management. This production-ready application demonstrates functional programming excellence with 30+ automated tests and enterprise-level architecture.
+A comprehensive F# e-commerce simulation system with dual user interfaces (Console CLI + Modern GUI), SQLite database integration, advanced price calculation engine, and complete order management. This production-ready application demonstrates functional programming excellence with 17 automated tests and enterprise-level architecture.
 
 ## 📋 Table of Contents
 
@@ -32,7 +32,7 @@ The Simple Store Simulator is a production-ready F# e-commerce application that 
 **Development Period:** Fall 2024 - Winter 2025  
 **Version:** 1.0 (Production Ready)  
 **Target Framework:** .NET 6.0  
-**Total Tests:** 30 Automated Unit Tests (All Passing)
+**Total Tests:** 17 Automated Unit Tests (All Passing)
 
 ## 🌟 Key Highlights
 
@@ -40,7 +40,7 @@ The Simple Store Simulator is a production-ready F# e-commerce application that 
 - ✅ **Database Integration**: SQLite with 33+ products across 6 categories
 - ✅ **Advanced Features**: Tax calculation, shipping costs, multi-tier discount engine
 - ✅ **Data Export**: JSON, CSV, and Text format support with timestamped orders
-- ✅ **Comprehensive Testing**: 30 automated tests with 100% pass rate
+- ✅ **Comprehensive Testing**: 17 automated tests with 100% pass rate
 - ✅ **Functional Programming**: Pure functions, immutable data, pattern matching
 - ✅ **Clean Architecture**: Multi-tier layered design with clear separation of concerns
 - ✅ **Production Ready**: Error handling, validation, and professional UX
@@ -362,12 +362,12 @@ Simple Store Simulator/
 │   ├── 📄 Main.fs                    # Test runner entry point
 │   ├── 📄 README.md                  # Testing documentation
 │   │
-│   ├── 📄 ProductTests.fs            # Product module tests (5 tests)
-│   ├── 📄 CartOperationsTests.fs     # Cart operations tests (8 tests)
-│   ├── 📄 PriceCalculatorTests.fs    # Price calculator tests (6 tests)
-│   ├── 📄 SearchOperationsTests.fs   # Search & filter tests (5 tests)
-│   ├── 📄 JsonAndDatabaseTests.fs    # JSON & DB tests (2 tests)
-│   ├── 📄 FileOperationsAutomationTests.fs  # File I/O tests (2 tests)
+│   ├── 📄 ProductTests.fs            # Product module tests (3 tests)
+│   ├── 📄 CartOperationsTests.fs     # Cart operations tests (4 tests)
+│   ├── 📄 PriceCalculatorTests.fs    # Price calculator tests (3 tests)
+│   ├── 📄 SearchOperationsTests.fs   # Search & filter tests (3 tests)
+│   ├── 📄 JsonAndDatabaseTests.fs    # JSON & DB tests (1 test)
+│   ├── 📄 FileOperationsAutomationTests.fs  # File I/O tests (1 test)
 │   └── 📄 DiscountEngineAutomationTests.fs  # Discount tests (2 tests)
 │   
 │   └── 📂 bin/, obj/                 # Test build outputs
@@ -395,7 +395,7 @@ Simple Store Simulator/
 
 - **`src/`**: Core business logic organized by domain (Product, Cart, Calculator, Search, FileIO)
 - **`GUI/`**: Complete Avalonia GUI application with MVVM architecture
-- **`tests/`**: 30 comprehensive unit tests with 100% pass rate
+- **`tests/`**: 17 essential unit tests with 100% pass rate
 - **`docs/`**: Complete project documentation and architecture diagrams
 - **`GUI/data/orders/`**: Persistent storage for customer orders (100+ saved orders)
 
@@ -442,7 +442,7 @@ SearchTypes.fs → Product.fs → ProductDatabase.fs → SearchOperations.fs
    cd tests
    dotnet test
    ```
-   Expected output: ✅ All 30 tests passed
+   Expected output: ✅ All 17 tests passed
 
 ## 🎮 Running the Application
 
@@ -1132,56 +1132,43 @@ ensureDirectoryExists: string -> unit
 
 ### Test Suite Overview
 
-**Total Tests:** 30 automated unit tests  
+**Total Tests:** 17 automated unit tests  
 **Pass Rate:** 100% ✅  
 **Framework:** Expecto 10.2.1  
 **Location:** `tests/` directory
 
 ### Test Files and Coverage
 
-#### 1. ProductTests.fs (5 tests)
-- ✅ Product type creation
-- ✅ Catalog initialization
-- ✅ Get product by ID
-- ✅ Get all products
-- ✅ Filter by category
+#### 1. ProductTests.fs (3 tests)
+- ✅ Catalog initialization from database
+- ✅ Get product by ID with correct data
+- ✅ Update stock changes correctly
 
-#### 2. CartOperationsTests.fs (8 tests)
-- ✅ Create empty cart
-- ✅ Add product to cart
-- ✅ Add multiple products
+#### 2. CartOperationsTests.fs (4 tests)
+- ✅ Add item to empty cart
+- ✅ Add same item twice (quantity accumulation)
 - ✅ Remove product from cart
-- ✅ Update quantity
-- ✅ Clear cart
-- ✅ Get cart item count
-- ✅ Check if cart is empty
+- ✅ Checkout updates catalog stock
 
-#### 3. PriceCalculatorTests.fs (6 tests)
-- ✅ Calculate item subtotal
-- ✅ Calculate cart subtotal
-- ✅ Calculate tax (14% VAT)
-- ✅ Calculate shipping (free over 200 EGP)
-- ✅ Calculate total with tax and shipping
-- ✅ Create order summary
+#### 3. PriceCalculatorTests.fs (3 tests)
+- ✅ Calculate cart subtotal with multiple items
+- ✅ Calculate tax from subtotal
+- ✅ Calculate cart total with all fees
 
-#### 4. SearchOperationsTests.fs (5 tests)
-- ✅ Search by name (case-insensitive)
-- ✅ Filter by price range
-- ✅ Filter by category
-- ✅ Sort by price ascending
-- ✅ Sort by price descending
+#### 4. SearchOperationsTests.fs (3 tests)
+- ✅ Search by name finds matching products
+- ✅ Filter by category returns only matching
+- ✅ Apply search criteria filters correctly
 
-#### 5. JsonAndDatabaseTests.fs (2 tests)
-- ✅ JSON serialization/deserialization
-- ✅ Database product loading
+#### 5. JsonAndDatabaseTests.fs (1 test)
+- ✅ Database initializes successfully
 
-#### 6. FileOperationsAutomationTests.fs (2 tests)
-- ✅ Save order to JSON file
-- ✅ Export to CSV format
+#### 6. FileOperationsAutomationTests.fs (1 test)
+- ✅ Save order creates JSON file successfully
 
 #### 7. DiscountEngineAutomationTests.fs (2 tests)
-- ✅ Apply percentage discount
-- ✅ Apply Buy X Get Y Free discount
+- ✅ Apply percentage discount to cart
+- ✅ Buy X Get Y discount calculation
 
 ### Running Tests
 
@@ -1203,10 +1190,10 @@ dotnet test /p:CollectCoverage=true
 ### Test Output Example
 
 ```
-Expecto! 30 tests run in 00:00:00.5 for SimpleStoreSimulator.Tests - 30 passed, 0 ignored, 0 failed, 0 errored.
+Passed!  - Failed:     0, Passed:    17, Skipped:     0, Total:    17, Duration: 507 ms
 
 [16:32:47 INF] EXPECTO? Running tests...
-[16:32:47 INF] EXPECTO! 30 tests run - 30 passed, 0 failed, 0 errored, 0 ignored
+[16:32:47 INF] EXPECTO! 17 tests run - 17 passed, 0 failed, 0 errored, 0 ignored
 ```
 
 ### Testing Best Practices
@@ -1221,10 +1208,10 @@ Expecto! 30 tests run in 00:00:00.5 for SimpleStoreSimulator.Tests - 30 passed, 
 
 ### Test Coverage Goals
 
-- ✅ **Achieved:** 100% of critical business logic tested
-- ✅ **Achieved:** All cart operations fully covered
-- ✅ **Achieved:** All calculation functions verified
-- ✅ **Achieved:** Search and filter operations tested
+- ✅ **Achieved:** Essential business logic tested
+- ✅ **Achieved:** Critical cart operations covered
+- ✅ **Achieved:** Core calculation functions verified
+- ✅ **Achieved:** Key search and filter operations tested
 - ✅ **Achieved:** Database and file I/O operations validated
 
 ### Quality Assurance
@@ -1491,7 +1478,7 @@ This project is developed for educational purposes as part of the Programming La
 
 - ✅ **Complete Implementation**: All planned features delivered
 - ✅ **Dual Interfaces**: CLI + GUI both fully functional
-- ✅ **100% Test Pass Rate**: All 30 automated tests passing
+- ✅ **100% Test Pass Rate**: All 17 automated tests passing
 - ✅ **Production Ready**: Error handling, validation, professional UX
 - ✅ **Database Integration**: SQLite with 33+ products
 - ✅ **Advanced Features**: Tax, shipping, multi-tier discounts
