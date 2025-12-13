@@ -128,56 +128,6 @@ let updateMultipleProductsStock (updates: (int * int) list) : unit =
         printfn "Error updating stocks: %s" ex.Message
         reraise()
 
-(*
-// UTILITY FUNCTION: Replenish random products with random stock (10-50 units)
-// This function randomly selects 30-50% of products and adds 10-50 units to each
-// Uncomment to use for testing or inventory restocking simulation
-let replenishRandomStock (catalog: ProductCatalog) : ProductCatalog =
-    let random = System.Random()
-    let allProducts = catalog |> Map.toList
-    
-    // Select random 30-50% of products
-    let percentageToRestock = 30 + random.Next(21) // 30-50%
-    let countToRestock = (allProducts.Length * percentageToRestock) / 100
-    let productsToRestock = 
-        allProducts 
-        |> List.sortBy (fun _ -> random.Next())
-        |> List.take countToRestock
-    
-    printfn "\n🔄 RESTOCKING INVENTORY 🔄"
-    printfn "Restocking %d products (%.0f%% of catalog)..." countToRestock (float percentageToRestock)
-    printfn "═══════════════════════════════════════════════════════\n"
-    
-    // Build update list for database
-    let updates = ResizeArray<int * int>()
-    
-    // Update catalog and prepare database updates
-    let updatedCatalog =
-        productsToRestock
-        |> List.fold (fun acc (productId, product) ->
-            let addedStock = 10 + random.Next(41) // 10-50 units
-            let newStock = product.Stock + addedStock
-            
-            printfn "📦 %s (ID: %d)" product.Name productId
-            printfn "   Old Stock: %d units" product.Stock
-            printfn "   Added: +%d units" addedStock
-            printfn "   New Stock: %d units\n" newStock
-            
-            updates.Add((productId, newStock))
-            
-            let updatedProduct = { product with Stock = newStock }
-            Map.add productId updatedProduct acc
-        ) catalog
-    
-    // Update database with all changes in a transaction
-    updateMultipleProductsStock (updates |> List.ofSeq)
-    
-    printfn "═══════════════════════════════════════════════════════"
-    printfn "✅ Restocking complete! Database updated.\n"
-    
-    // Reload from database to ensure consistency
-    loadProductsFromDatabase()
-*)
 
 // Initialize catalog: load from database or create default and save
 let initializeCatalogWithDatabase () : ProductCatalog =

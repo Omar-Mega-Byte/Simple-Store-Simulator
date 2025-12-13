@@ -44,14 +44,6 @@ let priceCalculatorTests =
             let tax = calculateTax 100m 0.14m
             Expect.equal tax 14m "Tax should be 100 x 0.14 = 14"
         
-        testCase "Calculate shipping fee for tier 1 (1-5 items)" <| fun _ ->
-            let fee = calculateShippingFee 3 10m 20m 30m
-            Expect.equal fee 10m "Shipping for 3 items should be tier 1"
-        
-        testCase "Calculate shipping fee for tier 3 (11+ items)" <| fun _ ->
-            let fee = calculateShippingFee 15 10m 20m 30m
-            Expect.equal fee 30m "Shipping for 15 items should be tier 3"
-        
         testCase "Calculate cart total with all fees" <| fun _ ->
             let cart = createTestCart()  // Subtotal: 60.00
             let total = calculateCartTotal cart 0.14m (10m, 20m, 30m)

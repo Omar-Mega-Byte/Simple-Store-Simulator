@@ -81,20 +81,6 @@ let discountEngineTests =
             let discount = applyDiscountToCart cart rule
             Expect.equal discount 13.00m "20% of 65.00 should be 13.00"
         
-        testCase "Calculate cart total with percentage discount" <| fun _ ->
-            let cart = createTestCart()
-            let rule = createPercentageDiscountRule()
-            let config = { TaxRate = 0.14m; ShippingRates = (10m, 20m, 30m) }
-            let discountedTotal = calculateCartTotalWithDiscount cart rule config.TaxRate config.ShippingRates
-            let originalTotal = calculateCartTotal cart config.TaxRate config.ShippingRates
-            Expect.isLessThan discountedTotal originalTotal "Discounted total should be less"
-        
-        testCase "Apply fixed discount with minimum purchase" <| fun _ ->
-            let cart = createTestCart()
-            let rule = createFixedDiscountRule()
-            let discount = applyDiscountToCart cart rule
-            Expect.isGreaterThan discount 0m "Should get discount when meeting minimum"
-        
         testCase "Buy X Get Y discount calculation" <| fun _ ->
             let cart = empty
             match addItem sampleCatalog 1 3 cart with

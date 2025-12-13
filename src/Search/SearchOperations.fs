@@ -4,7 +4,6 @@ open SearchTypes
 open Product
 open System
 
-// Search & Filter Module - عمر أحمد الرفاعي طليس (Team Leader)
 // This module provides comprehensive search, filter, and sort operations
 
 // ============================================

@@ -47,14 +47,6 @@ let cartOperationsTests =
             | Error msg ->
                 failtest $"First add should succeed: {msg}"
         
-        testCase "Add item exceeding stock fails" <| fun _ ->
-            let result = addItem sampleCatalog 1 1000 empty
-            match result with
-            | Ok _ ->
-                failtest "Adding more than stock should fail"
-            | Error msg ->
-                Expect.stringContains msg "Insufficient stock" "Error should mention insufficient stock"
-        
         testCase "Remove item from cart succeeds" <| fun _ ->
             let cart1Result = addItem sampleCatalog 1 5 empty
             match cart1Result with

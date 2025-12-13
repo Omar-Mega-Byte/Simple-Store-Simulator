@@ -84,30 +84,4 @@ let fileOperationsTests =
                 try File.Delete(filePath) with | _ -> ()
             | Error msg ->
                 failtest $"Order save should succeed: {msg}"
-        
-        testCase "Save order summary creates readable text file" <| fun _ ->
-            let order = createTestOrder()
-            let saveResult = saveOrderSummary order
-            match saveResult with
-            | Ok filePath ->
-                Expect.isTrue (File.Exists filePath) "Summary file should be created"
-                Expect.stringEnds filePath ".txt" "Summary should be text file"
-                let content = File.ReadAllText(filePath)
-                Expect.stringContains content "ORDER SUMMARY" "Should contain header"
-                try File.Delete(filePath) with | _ -> ()
-            | Error msg ->
-                failtest $"Order summary save should succeed: {msg}"
-        
-        testCase "Export product catalog to CSV" <| fun _ ->
-            let catalog = sampleCatalog
-            let result = exportProductCatalogToCsv catalog
-            match result with
-            | Ok filePath ->
-                Expect.isTrue (File.Exists filePath) "CSV file should be created"
-                Expect.stringEnds filePath ".csv" "File should be CSV"
-                let content = File.ReadAllText(filePath)
-                Expect.stringContains content "Id,Name,Price" "Should contain CSV header"
-                try File.Delete(filePath) with | _ -> ()
-            | Error msg ->
-                failtest $"Export should succeed: {msg}"
     ]

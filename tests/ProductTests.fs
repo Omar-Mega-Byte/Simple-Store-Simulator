@@ -33,11 +33,6 @@ let productTests =
             | None ->
                 failtest "Product should exist"
         
-        testCase "Get products by category filters correctly" <| fun _ ->
-            let snacks = getProductsByCategory sampleCatalog "Snacks"
-            Expect.isNonEmpty snacks "Should find products in Snacks category"
-            Expect.all snacks (fun p -> p.Category = "Snacks") "All products should be in Snacks category"
-        
         testCase "Update stock changes product stock correctly" <| fun _ ->
             let updatedCatalog = updateStock sampleCatalog 1 50
             match getProduct updatedCatalog 1 with

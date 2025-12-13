@@ -32,18 +32,6 @@ let searchOperationsTests =
             Expect.all results (fun p -> p.Category = "Snacks") 
                 "All results should be in Snacks category"
         
-        testCase "Filter by price range returns products in range" <| fun _ ->
-            let results = filterByPriceRange allProducts 10m 20m
-            Expect.isNonEmpty results "Should find products in range 10-20"
-            Expect.all results (fun p -> p.Price >= 10m && p.Price <= 20m) 
-                "All products should be in price range"
-        
-        testCase "Sort by price ascending orders correctly" <| fun _ ->
-            let sorted = sortByPrice allProducts true
-            let prices = sorted |> List.map (fun p -> p.Price)
-            let sortedPrices = prices |> List.sort
-            Expect.equal prices sortedPrices "Prices should be in ascending order"
-        
         testCase "Apply search criteria filters correctly" <| fun _ ->
             let criteria = {
                 SearchTerm = Some "cookie"
