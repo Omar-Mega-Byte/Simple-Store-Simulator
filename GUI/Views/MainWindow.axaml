@@ -479,7 +479,7 @@
             <Grid>
                 <TextBlock Text="{Binding StatusMessage}" 
                            Foreground="White" FontSize="11" VerticalAlignment="Center"/>
-                <TextBlock Text="© 2025 Simple Store Simulator | Team: عمر، علي، باسل، مايكل" 
+                <TextBlock Text="© 2025 Simple Store Simulator | Team: Omar El-Refaee, Omar Awwad, Ali Gomaa, Bassel Waleed, Omar Ahmed, Michael Emad, Kerolos Sary, Gamal Ayman" 
                            Foreground="#3498DB" FontSize="10" 
                            HorizontalAlignment="Right" VerticalAlignment="Center"/>
             </Grid>
