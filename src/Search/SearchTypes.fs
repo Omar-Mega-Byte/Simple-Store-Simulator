@@ -49,7 +49,7 @@ type SearchResult<'T> = {
     SearchTime: System.TimeSpan
     AppliedFilters: string list
 }
-
+/// Utility functions [لسه مستخدمتهمش]
 /// Create empty search criteria (no filters)
 let createEmptySearchCriteria () : SearchCriteria =
     {
