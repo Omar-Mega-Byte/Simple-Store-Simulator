@@ -430,7 +430,7 @@ let runExamples () =
     printfn "Example 4: All Applicable Discounts"
     let allRules = [discount10Percent; discount20Percent; sweetsCategoryDiscount; buy2Get1Free]
     displayApplicableDiscounts cart allRules
-    printfn ""
+    printfn"
     
     printfn "Example 5: Best Discount"
     match findBestDiscount cart allRules with
@@ -443,3 +443,4 @@ let runExamples () =
 
 // Uncomment to run examples
 // runExamples()
+// ============================================
